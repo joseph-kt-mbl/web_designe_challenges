@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Circle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="performance-circle" data-percent="50">
+        <div class="outer">
+            <div class="inner">
+                <div id="percentage">
+                    <p class="gradient-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="200px" height="200px">
+            <defs>
+               <linearGradient id="GradientColor">
+                  <stop offset="0%" stop-color="#e91e63" />
+                  <stop offset="100%" stop-color="#673ab7" />
+               </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="85" stroke-linecap="round" />
+        </svg>
+    
+    </div>
+    <div id="choose_percentage">
+        <input type="number" min="0" max="100">
+    </div>
+    <script>
+             
+            const choose = document.getElementById('choose_percentage');
+            const input = choose.querySelector('input');
+            input.value = '50'
+            const performance = document.querySelector('.performance-circle');
+        
+            input.addEventListener('blur', () => {
+                const val = parseInt(input.value);
+                if (val >= 0 && val <= 100) {
+                    performance.setAttribute('data-percent', val);
+                    update();
+                } else {
+                    // Handle invalid input
+                    alert('Please enter a value between 0 and 100.');
+                }
+            });
+        
+            function update() {
+                const percentage = performance.querySelector('.gradient-text');
+                const circleElement = performance.querySelector('circle');
+        
+                // Update the text content of the percentage element
+                percentage.textContent = performance.getAttribute('data-percent') + '%';
+        
+                // Calculate the stroke-dashoffset based on the percentage
+                const circumference = parseInt(circleElement.getAttribute('r')) * 2 * Math.PI;
+                const dashOffset = circumference * (1 - +performance.getAttribute('data-percent') / 100);
+        
+                // Set the CSS custom property --dash-offset to the calculated dash offset value
+                document.documentElement.style.setProperty('--dash-offset', dashOffset);
+        
+                circleElement.style.animation = 'none';
+                setTimeout(() => {
+                    circleElement.style.animation = 'anim 2s linear forwards';
+                }, 10);
+            }
+        
+            // Initial update when the page loads
+            update();
+
+    </script>
+</body>
+</html>

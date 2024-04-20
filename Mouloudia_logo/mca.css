@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#logo{
+    overflow: hidden;
+    height: 400px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    border: 6px solid #eccc1a;
+    border-top: none;
+    border-radius: 50% 50% 50% 50% / 0% 0% 100% 100% ;
+    text-align: center;
+}
+#logo::before,#logo::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 169px;
+}
+#logo::before {
+    background-color: #14d714;
+    left: 0;
+}#logo::after{
+    background-color: red;
+    right: 0;
+}
+#logo p{
+    position: absolute;
+    top: -50%;
+}
+.star {
+    display: block;
+    color: gold;
+    font-size: 108px;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.8); /* Glowing effect */
+    z-index: 99;
+    width: 100%;
+}
+#logo span{
+    width: 260px;
+    height: 80px;
+    border-radius: 30% 70% 33% 67% / 0% 0% 100% 100% ;
+    background-color: #1e1e1e;
+    position: absolute;
+    top: -60px;
+    z-index: 999;
+}
+#logo #sp1{
+    left: -10px;
+    border-radius: 30% 70% 67% 33% / 0% 0% 100% 100% ;
+    transform: rotate(-12deg);
+}
+#logo #sp2{
+    right: -10px;
+    transform: rotate(12deg);
+}
+
